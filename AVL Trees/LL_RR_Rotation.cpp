@@ -101,10 +101,10 @@ Node* AVL::RLRotation(Node *p) {
     if (!p) return nullptr;
 
     // Perform left rotation on the left child
-    p->lchild = RRRotation(p->lchild);
+    p->lchild = LLRotation(p->lchild);
 
     // Perform right rotation on the root
-    return LLRotation(p);
+    return RRRotation(p);
 }
  
 Node* AVL::rInsert(Node *p, int key) {
@@ -143,8 +143,8 @@ Node* AVL::rInsert(Node *p, int key) {
  
 void AVL::Preorder(Node *p) {
     if (p){
-        Preorder(p->lchild);
         cout << p->data << ", " << flush;
+        Preorder(p->lchild);
         Preorder(p->rchild);
     }
 }
@@ -169,6 +169,21 @@ int main() {
  
     trr.Preorder();
     cout << endl;
- 
+    // LR Rotation
+    AVL tlr;
+    tlr.root = tlr.rInsert(tlr.root, 30);
+    tlr.root = tlr.rInsert(tlr.root, 10);
+    tlr.root = tlr.rInsert(tlr.root, 20);
+    tlr.Preorder();
+    cout << endl;
+
+    // RL Rotation
+    AVL trl;
+    trl.root = trl.rInsert(trl.root, 10);
+    trl.root = trl.rInsert(trl.root, 30);
+    trl.root = trl.rInsert(trl.root, 20);
+    trl.Preorder();
+    cout << endl;
+    
     return 0;
 }
