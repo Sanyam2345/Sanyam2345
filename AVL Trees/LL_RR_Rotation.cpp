@@ -88,11 +88,23 @@ Node* AVL::RRRotation(Node *p) {
 }
  
 Node* AVL::LRRotation(Node *p) {
-    return nullptr;
+    if (!p) return nullptr;
+
+    // Perform left rotation on the left child
+    p->lchild = RRRotation(p->lchild);
+
+    // Perform right rotation on the root
+    return LLRotation(p);
 }
  
 Node* AVL::RLRotation(Node *p) {
-    return nullptr;
+    if (!p) return nullptr;
+
+    // Perform left rotation on the left child
+    p->lchild = RRRotation(p->lchild);
+
+    // Perform right rotation on the root
+    return LLRotation(p);
 }
  
 Node* AVL::rInsert(Node *p, int key) {
